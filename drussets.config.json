@@ -6,7 +6,7 @@
 	},
 	"assets":{
 		"path": "./src",
-		"libraries": "./src/libraries"
+		"libraries": "libraries"
 	},
 	"css":{
 		"src": "./src/libraries",

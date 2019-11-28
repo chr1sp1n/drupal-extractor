@@ -30,7 +30,7 @@ class Node {
       return;
     }
 
-    $languageCode = Utility\Language::current();
+    $languageCode = $languageCode ? $languageCode : Utility\Language::current();
 
     $node = self::getTranslated($node, $languageCode);
 
@@ -38,26 +38,18 @@ class Node {
     $data->language_code = $languageCode;
     $data->node_url = $node->toUrl('canonical', [ 'language' => $node->language(), 'absolute' => true ])->toString();
 
-
     if($fields = $node->getFields()){
       foreach ($fields as $fieldName => $field) {
         if(in_array($fieldName, $fieldsExcluded)) continue;
-
-        //if( strpos($fieldName,'field_') !== false ){
-          $typeName = $field->getFieldDefinition()->getType();
-          $method = Utility\Normalizer::methodName($typeName);
-          if( method_exists( '\Drupal\drupal_extractor\Extractors\Fields', $method ) ){
-            $data->{$fieldName} = Fields::$method($field, $languageCode);
-          }
-        //}
-
+        $typeName = $field->getFieldDefinition()->getType();
+        $method = Utility\Normalizer::methodName($typeName);
+        if( method_exists( '\Drupal\drupal_extractor\Extractors\Fields', $method ) ){
+          $data->{$fieldName} = Fields::$method($field, $languageCode);
+        }
       }
-
     }
 
-
-    $variables['fields'] = $data;
-
+    return $data;
   }
 
   /**

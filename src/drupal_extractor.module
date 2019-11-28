@@ -15,8 +15,10 @@ function drupal_extractor_preprocess_html(&$variables){
 //3°
 function drupal_extractor_preprocess_page(&$variables){
 
-  Entities\Node::get($variables);
+  $data = Entities\Node::get($variables);
 
-  var_dump($variables['fields']);
+  $variables['node_fields'] = $data;
+
+  var_dump($variables['node_fields']);
 
 }
