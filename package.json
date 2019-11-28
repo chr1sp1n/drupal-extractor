@@ -1,0 +1,17 @@
+{
+  "name": "drupal_extractor",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "drussets init",
+    "watch": "drussets watch",
+    "dev": "drussets dev",
+    "dist": "drussets dist"
+  },
+  "author": "chr1sp1n-dev",
+  "license": "ISC",
+  "devDependencies": {
+    "@chr1sp1n-dev/drussets": "git+https://github.com/chr1sp1n/drussets.git"
+  }
+}
